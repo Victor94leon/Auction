@@ -116,4 +116,18 @@ public class Auction
             }
         }
     }
+    
+    /**
+     * Método que devuelve una colección de todos los items por los que no ha habido ninguna puja hasta el momento
+     */
+    public ArrayList<Lot> getUnsold()
+    {
+        ArrayList<Lot> listaSinVender = new ArrayList<Lot>(); 
+        for (Lot lotEnLista : lots) {
+            if (lotEnLista.getHighestBid()==null) {
+                listaSinVender.add(lotEnLista);
+            }
+        }
+        return listaSinVender;
+    }
 }
