@@ -43,7 +43,7 @@ public class Auction
             System.out.println(lot.toString());
         }
     }
-    
+
     /**
      * Make a bid for a lot.
      * A message is printed indicating whether the bid is
@@ -60,13 +60,13 @@ public class Auction
             boolean successful = selectedLot.bidFor(new Bid(bidder, value));
             if(successful) {
                 System.out.println("The bid for lot number " +
-                                   lotNumber + " was successful.");
+                    lotNumber + " was successful.");
             }
             else {
                 // Report which bid is higher.
                 System.out.println("Lot number: " + lotNumber +
-                                   " already has a bid of: " +
-                                   selectedLot.getHighestBid().getValue());
+                    " already has a bid of: " +
+                    selectedLot.getHighestBid().getValue());
             }
         }
     }
@@ -78,28 +78,35 @@ public class Auction
      */
     public Lot getLot(int lotNumber)
     {
+        Lot selectedLot;
         if((lotNumber >= 1) && (lotNumber < nextLotNumber)) {
             // The number seems to be reasonable.
-            Lot selectedLot = lots.get(lotNumber - 1);
+            selectedLot = lots.get(lotNumber - 1);
             // Include a confidence check to be sure we have the
             // right lot.
-            if(selectedLot.getNumber() != lotNumber) {
-                System.out.println("Internal error: Lot number " +
-                                   selectedLot.getNumber() +
-                                   " was returned instead of " +
-                                   lotNumber);
-                // Don't return an invalid lot.
-                selectedLot = null;
+            if (selectedLot!=null) {
+                if(selectedLot.getNumber() != lotNumber) {
+                    System.out.println("Internal error: Lot number " +
+                        selectedLot.getNumber() +
+                        " was returned instead of " +
+                        lotNumber);
+                    // Don't return an invalid lot.
+                    selectedLot = null;
+                }
             }
-            return selectedLot;
+            else {
+                System.out.println("Ese objeto ha sido eliminado");
+                selectedLot = null;
+            }         
         }
         else {
             System.out.println("Lot number: " + lotNumber +
-                               " does not exist.");
-            return null;
+                " does not exist.");
+            selectedLot = null;
         }
+        return selectedLot;
     }
-    
+
     /**
      * Método que muestra por pantalla los detalles de todos los items que estén subastandose
      */
@@ -116,7 +123,7 @@ public class Auction
             }
         }
     }
-    
+
     /**
      * Método que devuelve una colección de todos los items por los que no ha habido ninguna puja hasta el momento
      */
