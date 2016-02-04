@@ -99,4 +99,21 @@ public class Auction
             return null;
         }
     }
+    
+    /**
+     * Método que muestra por pantalla los detalles de todos los items que estén subastandose
+     */
+    public void close()
+    {
+        for (Lot lotEnLista : lots) {
+            System.out.println("Código del item: " + lotEnLista.getNumber());
+            System.out.println("Descripción del item: " + lotEnLista.getDescription());
+            if (lotEnLista.getHighestBid()!=null) {
+                System.out.println("Puja más alta: " + lotEnLista.getHighestBid().getValue() + ", realizada por: " + lotEnLista.getHighestBid().getBidder().getName());
+            }
+            else {
+                System.out.println("Aún no hay pujas en este item");
+            }
+        }
+    }
 }
