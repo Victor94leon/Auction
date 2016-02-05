@@ -121,4 +121,24 @@ public class Auction
         }
         return listaSinVender;
     }
+    
+     /**
+     * Método que elimina un elemento de la lista mediante un parámetro que representa 
+     * el número identificativo del item, devolviendo el objeto eliminado o null si este no existe.
+     */
+    public Lot removeLot(int idNum)
+    {
+        int index = 0;
+        boolean lotEncontrado = false;
+        Lot lotEliminado = null;
+        while (!lotEncontrado && index<lots.size()) {
+            if (lots.get(index).getNumber()==idNum) {
+                lotEliminado = lots.get(index);
+                lots.remove(index);
+                lotEncontrado = true;
+            }
+            index++;
+        }
+        return lotEliminado;
+    }
 }
